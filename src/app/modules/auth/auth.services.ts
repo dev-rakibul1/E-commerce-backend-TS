@@ -27,8 +27,8 @@ const loginUserService = async (
   if (!isPasswordMatch) {
     throw new Error("Password does not match.");
   }
-  console.log({ email, password, isPasswordMatch });
 
+  // Access token
   const accessToken = jwtHelpers.createToken(
     {
       email: isEmailExist?.email,

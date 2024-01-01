@@ -14,7 +14,7 @@ const createShiftController = catchAsync(
     const payload = req.body;
     const result = await shifteeServices.createShiftServices(payload);
 
-    console.log("Payload from shift create", payload);
+    // console.log("Payload from shift create", payload);
 
     sendResponse<IEmployee>(res, {
       statusCode: httpStatus.OK,

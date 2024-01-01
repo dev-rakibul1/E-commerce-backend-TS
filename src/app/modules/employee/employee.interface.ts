@@ -18,6 +18,7 @@ export type IEmployee = {
   password: string;
   profilePicture?: string;
   shift?: Types.Array<Schema.Types.ObjectId | IShift>;
+  newPassword?: string;
 };
 
 export type IEmployeeMethods = {
@@ -33,3 +34,8 @@ export type EmoloyeeModel = Model<
   Record<string, unknown>,
   IEmployeeMethods
 >;
+
+export type ICrateEmployeeWithToken = {
+  accessToken: string;
+  data: object;
+};

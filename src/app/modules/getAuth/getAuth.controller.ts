@@ -9,9 +9,11 @@ import { getAuthServices } from "./getAuth.services";
 const getAuth = catchAsync(async (req: Request, res: Response) => {
   const auth = "658fc4ada857bad875bb3ed4";
 
-  console.log("cookies___auth:", req.cookies.authorization);
+  const token = req.headers.authorization
+    ? req.headers.authorization
+    : undefined;
 
-  const result = await getAuthServices.getAuthFilter(auth);
+  const result = await getAuthServices.getAuthFilter(token);
 
   sendResponse<IEmployee>(res, {
     statusCode: httpStatus.OK,

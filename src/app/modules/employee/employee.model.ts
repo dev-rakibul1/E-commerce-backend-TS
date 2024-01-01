@@ -65,6 +65,9 @@ const employeeSchema = new Schema<IEmployee, EmoloyeeModel>(
         ref: "Shift",
       },
     ],
+    newPassword: {
+      type: String,
+    },
   },
   {
     timestamps: true,

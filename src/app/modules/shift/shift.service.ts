@@ -95,8 +95,6 @@ const getSingleShiftServices = async (id: string): Promise<IShift> => {
 const filterByEmployeeServices = async (id: string): Promise<IShift | null> => {
   const result = await Shift.findOne({ employee: id });
 
-  console.log(result);
-
   if (!result) {
     throw new ApiError(httpStatus.FORBIDDEN, "Shift not available.");
   }

@@ -14,38 +14,39 @@ router.post(
 );
 router.get(
   "/",
-  // auth(
-  //   ENUM_EMPLOYEE_ROLE.ADMINISTRATOR,
-  //   ENUM_EMPLOYEE_ROLE.SUPERVISOR,
-  //   ENUM_EMPLOYEE_ROLE.EMPLOYEE
-  // ),
+  auth(
+    ENUM_EMPLOYEE_ROLE.ADMINISTRATOR,
+    ENUM_EMPLOYEE_ROLE.SUPERVISOR,
+    ENUM_EMPLOYEE_ROLE.EMPLOYEE
+  ),
   employeeController.getAllEmployeeController
 );
 router.get(
   "/supervisor",
-  // auth(
-  //   ENUM_EMPLOYEE_ROLE.ADMINISTRATOR,
-  //   ENUM_EMPLOYEE_ROLE.SUPERVISOR,
-  //   ENUM_EMPLOYEE_ROLE.EMPLOYEE
-  // ),
+  auth(ENUM_EMPLOYEE_ROLE.ADMINISTRATOR),
   employeeController.getAllSupervisorController
 );
 router.get(
+  "/administrator",
+  auth(ENUM_EMPLOYEE_ROLE.ADMINISTRATOR),
+  employeeController.getAllAdministratorController
+);
+router.get(
   "/:id",
-  // auth(
-  //   ENUM_EMPLOYEE_ROLE.ADMINISTRATOR,
-  //   ENUM_EMPLOYEE_ROLE.SUPERVISOR,
-  //   ENUM_EMPLOYEE_ROLE.EMPLOYEE
-  // ),
+  auth(
+    ENUM_EMPLOYEE_ROLE.ADMINISTRATOR,
+    ENUM_EMPLOYEE_ROLE.SUPERVISOR,
+    ENUM_EMPLOYEE_ROLE.EMPLOYEE
+  ),
   employeeController.getSingleEmployeeController
 );
 router.patch(
   "/:id",
-  // auth(
-  //   ENUM_EMPLOYEE_ROLE.ADMINISTRATOR,
-  //   ENUM_EMPLOYEE_ROLE.SUPERVISOR,
-  //   ENUM_EMPLOYEE_ROLE.EMPLOYEE
-  // ),
+  auth(
+    ENUM_EMPLOYEE_ROLE.ADMINISTRATOR,
+    ENUM_EMPLOYEE_ROLE.SUPERVISOR,
+    ENUM_EMPLOYEE_ROLE.EMPLOYEE
+  ),
   validateRequest(employeeZodValidation.updateEmployeeZodValidation),
   employeeController.updateEmployeeController
 );
@@ -53,6 +54,16 @@ router.delete(
   "/:id",
   auth(ENUM_EMPLOYEE_ROLE.ADMINISTRATOR),
   employeeController.deleteEmployeeController
+);
+
+router.patch(
+  "/password-change/:id",
+  auth(
+    ENUM_EMPLOYEE_ROLE.ADMINISTRATOR,
+    ENUM_EMPLOYEE_ROLE.SUPERVISOR,
+    ENUM_EMPLOYEE_ROLE.EMPLOYEE
+  ),
+  employeeController.passwordChangeController
 );
 
 export const employeeRoutes = router;

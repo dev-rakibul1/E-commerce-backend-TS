@@ -28,8 +28,6 @@ const loginEmployee = catchAsync(async (req: Request, res: Response) => {
 
 const refreshToken = catchAsync(async (req: Request, res: Response) => {
   const { refreshToken } = req.cookies;
-  console.log(refreshToken);
-  console.log("cookies___auth controller:", req.cookies.authorization);
 
   const result = await authService.refreshTokenService(refreshToken);
 
@@ -51,7 +49,24 @@ const refreshToken = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const logoutToken = catchAsync(async (req: Request, res: Response) => {
+  res.clearCookie("refreshToken", {
+    /* cookie options */
+  });
+  res.clearCookie("accessToken", {
+    /* cookie options */
+  });
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Logout successfully!",
+    data: null,
+  });
+});
+
 export const loginController = {
   loginEmployee,
   refreshToken,
+  logoutToken,
 };
